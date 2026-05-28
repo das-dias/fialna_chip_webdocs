@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <g id="capacitor">
+      <line x1="0" y1="0" x2="0" y2="20" stroke="black" stroke-width="2"/>
+      <line x1="-15" y1="20" x2="15" y2="20" stroke="black" stroke-width="2"/>
+      <line x1="-15" y1="28" x2="15" y2="28" stroke="black" stroke-width="2"/>
+      <line x1="0" y1="28" x2="0" y2="48" stroke="black" stroke-width="2"/>
+    </g>
+    
+    <g id="capacitor-horiz">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="black" stroke-width="2"/>
+      <line x1="20" y1="-15" x2="20" y2="15" stroke="black" stroke-width="2"/>
+      <line x1="28" y1="-15" x2="28" y2="15" stroke="black" stroke-width="2"/>
+      <line x1="28" y1="0" x2="48" y2="0" stroke="black" stroke-width="2"/>
+    </g>
+    
+    <g id="resistor">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="black" stroke-width="2"/>
+      <polyline points="0,10 -10,14 10,22 -10,30 10,38 -10,46 0,50" fill="none" stroke="black" stroke-width="2"/>
+      <line x1="0" y1="50" x2="0" y2="60" stroke="black" stroke-width="2"/>
+    </g>
+    
+    <g id="ground">
+      <line x1="0" y1="0" x2="0" y2="15" stroke="black" stroke-width="2"/>
+      <line x1="-15" y1="15" x2="15" y2="15" stroke="black" stroke-width="2"/>
+      <line x1="-10" y1="22" x2="10" y2="22" stroke="black" stroke-width="2"/>
+      <line x1="-4" y1="29" x2="4" y2="29" stroke="black" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <rect x="550" y="100" width="200" height="400" fill="#f0f4f8" stroke="#2c3e50" stroke-width="3"/>
+  <text x="650" y="140" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">Mixed-Signal IC</text>
+
+  <text x="50" y="255" font-family="sans-serif" font-size="14">Analog Signal In</text>
+  <circle cx="170" cy="250" r="4" fill="black"/>
+  <line x1="170" y1="250" x2="230" y2="250" stroke="black" stroke-width="2"/>
+  
+  <use href="#capacitor-horiz" x="230" y="250"/>
+  <text x="255" y="225" font-family="sans-serif" font-size="14" text-anchor="middle">C_AC</text>
+  <text x="255" y="285" font-family="sans-serif" font-size="12" text-anchor="middle">10pF</text>
+  
+  <line x1="278" y1="250" x2="550" y2="250" stroke="black" stroke-width="2"/>
+  <text x="560" y="255" font-family="sans-serif" font-size="14" font-weight="bold">CH0</text>
+  
+  <circle cx="400" cy="250" r="4" fill="black"/>
+  <line x1="400" y1="250" x2="400" y2="170" stroke="black" stroke-width="2"/>
+  <use href="#resistor" x="400" y="110"/> 
+  <text x="420" y="145" font-family="sans-serif" font-size="14">R_Bias</text>
+  
+  <circle cx="400" cy="110" r="4" fill="none" stroke="black"/>
+  <text x="400" y="95" font-family="sans-serif" font-size="14" text-anchor="middle" font-weight="bold">0.9V DC Bias</text>
+
+  <text x="560" y="405" font-family="sans-serif" font-size="14" font-weight="bold">TVDDA</text>
+  <line x1="550" y1="400" x2="150" y2="400" stroke="black" stroke-width="2"/>
+  
+  <circle cx="150" cy="400" r="4" fill="black"/>
+  <line x1="150" y1="400" x2="150" y2="350" stroke="black" stroke-width="2"/>
+  <circle cx="150" cy="350" r="4" fill="none" stroke="black"/>
+  <text x="150" y="335" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">+ VDD Power</text>
+
+  <circle cx="280" cy="400" r="4" fill="black"/>
+  <line x1="280" y1="400" x2="280" y2="430" stroke="black" stroke-width="2"/>
+  <use href="#capacitor" x="280" y="430"/>
+  <use href="#ground" x="280" y="478"/>
+  <text x="305" y="455" font-family="sans-serif" font-size="12">1.0µF Bulk</text>
+
+  <circle cx="480" cy="400" r="4" fill="black"/>
+  <line x1="480" y1="400" x2="480" y2="430" stroke="black" stroke-width="2"/>
+  <use href="#capacitor" x="480" y="430"/>
+  <use href="#ground" x="480" y="478"/>
+  <text x="505" y="455" font-family="sans-serif" font-size="12">0.1µF Shunt</text>
+
+  <text x="560" y="485" font-family="sans-serif" font-size="14" font-weight="bold">TVSSA</text>
+  <line x1="550" y1="480" x2="520" y2="480" stroke="black" stroke-width="2"/>
+  <line x1="520" y1="480" x2="520" y2="520" stroke="black" stroke-width="2"/>
+  <use href="#ground" x="520" y="520"/>
+
+</svg>

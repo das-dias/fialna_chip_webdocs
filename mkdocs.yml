@@ -1,0 +1,31 @@
+site_name: FIALNA-Tapeout Docs
+theme:
+  name: shadcn
+  show_title: true # show the title in the top bar
+  show_stargazers: true # show the stargazers in the top bar
+  pygments_style: # default styles 
+        light: shadcn-light
+        dark: github-dark
+  icon: heroicons:rocket-launch # use the shadcn svg if not defined
+  topbar_sections: false 
+  katex_options: # optional
+    macros: # example of macros
+      "\\RR": "\\mathbb{R}" 
+      "\\dx": "\\mathrm{d}x"
+  show_datetime: false 
+  accent: "oklch(64.5% 0.246 16.439)" # NEW!
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - js/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - FIALNA Tapeout Docs: index.md
+  - Controller Interface: interface.md
+  - Command Line Interface: cli.md
+  - Contributing: contributing.md

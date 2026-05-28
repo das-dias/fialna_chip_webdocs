@@ -1,0 +1,20 @@
+[project]
+name = "fialna-chip-webdocs"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "dasdias", email = "das.dias6@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.10.9",
+    "mkdocs>=1.6.1",
+    "mkdocs-shadcn>=0.10.6",
+    "numpy>=2.2.6",
+    "scipy>=1.15.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
