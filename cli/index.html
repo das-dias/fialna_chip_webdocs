@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        const base_url = "None"; /* for search plugin notably */
+    </script>
+    <script integrity="sha384-m6cZ+Whl1ci89lidlu8DH4C+sZLNOYBvImtjUIhUK+iaNffXhqtbYgBVuuPfRsa0" src="../js/dark.js"></script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+
+<title>Command Line Interface</title>
+
+
+
+
+
+
+
+
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="Command Line Interface">
+
+
+
+
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="Command Line Interface">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="../img/favicon.ico">
+
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/geist.css" rel="stylesheet">
+
+    
+    <style>
+        :root {
+            --theme-accent: oklch(64.5% 0.246 16.439);
+        }
+    </style>
+
+    
+
+    <script src="../js/callbacks.js"></script>
+
+    
+    
+<!-- katex -->
+<link href="../css/katex.min.css" rel="stylesheet"/>
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer="" integrity="sha384-YPHNAPyrxGS8BNnA7Q4ommqra8WQPEjooVSLzFgwgs8OXJBvadbyvx4QpfiFurGr" src="../js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer="" integrity="sha384-JKXHIJf8PKPyDFptuKZoUyMRQJAmQKj4B4xyOca62ebJhciMYGiDdq/9twUUWyZH" onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});' src="../js/auto-render.min.js"></script>
+    
+
+    
+
+    
+
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("a.headerlink").forEach(function (link) {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                // Build the full URL with the anchor fragment
+                const url = window.location.origin + window.location.pathname + this.getAttribute("href");
+
+                navigator.clipboard.writeText(url).then(function () {
+                    // Optional: brief visual feedback
+                });
+            });
+        });
+    });
+</script>
+    
+
+    
+    
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="None">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37q.159.666.16 1.38a6 6 0 0 1-6 6v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.9 14.9 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.9 14.9 0 0 0-2.58 5.84m2.699 2.7q-.155.032-.311.06a15 15 0 0 1-2.448-2.448l.06-.312m-2.24 2.39a4.49 4.49 0 0 0-1.757 4.306q.341.054.696.054a4.5 4.5 0 0 0 3.61-1.812M16.5 9a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">FIALNA-Tapeout Docs</h1>
+                
+            </a>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+    <button onclick="onSearchBarClick(event)" data-slot="dialog-trigger" data-variant="outline" data-size="default" class="inline-flex shrink-0 items-center gap-2 text-sm whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&amp;_svg]:pointer-events-none [&amp;_svg]:shrink-0 [&amp;_svg:not([class*='size-'])]:size-4 border bg-background hover:text-accent-foreground dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[&gt;svg]:px-3 relative h-8 w-full justify-start rounded-lg pl-3 font-normal text-foreground shadow-none hover:bg-muted/50 sm:pr-12 md:w-48 lg:w-56 xl:w-64 dark:bg-card" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-_r_1_" data-state="closed">
+        <span class="hidden lg:inline-flex">Search documentation...</span>
+        <span class="inline-flex lg:hidden">Search...</span>
+    </button>
+</div>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper"
+                    style="--sidebar-width:calc(var(--spacing) * 72);--sidebar-width-icon:3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="w-(--sidebar-width) flex-col text-sidebar-foreground sticky top-[calc(var(--header-height)+0.6rem)] z-30 hidden h-[calc(100svh-10rem)] overscroll-none bg-transparent [--sidebar-menu-width:--spacing(56)] lg:flex">
+                        <div class="h-9"></div>
+                        <div
+                            class="absolute top-8 z-10 h-8 w-(--sidebar-menu-width) shrink-0 bg-gradient-to-b from-background via-background/80 to-background/50 blur-xs">
+                        </div>
+                        <div
+                            class="absolute top-12 right-2 bottom-0 hidden h-full w-px bg-gradient-to-b from-transparent via-border to-transparent lg:flex">
+                        </div>
+                        <div data-slot="sidebar-content" data-sidebar="content" view-transition-name="sidebar"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden mx-auto no-scrollbar w-(--sidebar-menu-width) overflow-x-hidden px-2">
+                            
+
+
+
+
+
+
+
+
+
+
+
+<div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2 pt-6">
+    <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+        <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="None"
+        class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        FIALNA Tapeout Docs
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="None"
+        class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Controller Interface
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
+        data-size="default" href="None"
+        class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Command Line Interface
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+            
+            <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="None"
+        class="peer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
+
+        
+        Contributing
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+            
+            
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+<div
+    class="sticky -bottom-1 z-10 h-16 shrink-0 bg-gradient-to-t from-background via-background/80 to-background/50 blur-xs">
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1 class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+          Command Line Interface
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          <button
+    onclick="fetch(`/cli.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))"
+    data-slot="button" class="secondary cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+        <path
+            d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z">
+        </path>
+        <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+    </svg>
+    <span class="max-md:hidden">Copy Page</span>
+</button>
+          
+          <a data-slot="button" id="previous-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="None">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-left">
+              <path d="M5 12l14 0"></path>
+              <path d="M5 12l6 6"></path>
+              <path d="M5 12l6 -6"></path>
+            </svg>
+            <span class="sr-only">Previous</span>
+          </a>
+          
+          
+          <a data-slot="button" id="next-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="None">
+            <span class="sr-only">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-right">
+              <path d="M5 12l14 0"></path>
+              <path d="M13 18l6 -6"></path>
+              <path d="M13 6l6 6"></path>
+            </svg>
+          </a>
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <p>The FPGA UART Serial Controller is a terminal application for programming and running experiments through the FPGA interface. It provides a persistent REPL with tab-completion, a live connection status panel, and a full TX packet log.</p>
+<hr />
+<h2 id="installation">Installation</h2>
+<h3 id="dependencies">Dependencies</h3>
+<pre><code class="language-bash">pip install rich prompt_toolkit pyserial
+</code></pre>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rich</code></td>
+<td>Terminal rendering — panels, tables, colour</td>
+</tr>
+<tr>
+<td><code>prompt_toolkit</code></td>
+<td>Interactive REPL with tab-completion</td>
+</tr>
+<tr>
+<td><code>pyserial</code></td>
+<td>Serial port communication</td>
+</tr>
+</tbody>
+</table></div>
+<p>The CLI also requires <code>backend.py</code> (<code>FPGABackendLink</code>) to be present in the same directory.</p>
+<hr />
+<h2 id="launching">Launching</h2>
+<pre><code class="language-bash">python cli.py [--port &lt;port&gt;] [--baud &lt;baud&gt;]
+</code></pre>
+<h3 id="options">Options</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Short</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--port</code></td>
+<td><code>-p</code></td>
+<td><em>(none)</em></td>
+<td>Serial port to connect to on startup</td>
+</tr>
+<tr>
+<td><code>--baud</code></td>
+<td><code>-b</code></td>
+<td><code>115200</code></td>
+<td>Baud rate</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="examples">Examples</h3>
+<pre><code class="language-bash"># Launch and connect immediately
+python cli.py --port /dev/ttyUSB0 --baud 115200
+
+# Windows
+python cli.py -p COM3
+
+# Launch without connecting (connect manually inside the REPL)
+python cli.py
+</code></pre>
+<p>If <code>--port</code> is omitted the application starts disconnected. Use the <code>connect</code> command inside the REPL to establish a connection.</p>
+<hr />
+<h2 id="interface">Interface</h2>
+<p>On launch the application displays an ASCII banner followed by the REPL prompt:</p>
+<pre><code>[FPGA] ›                                              disconnected
+</code></pre>
+<p>The right-hand side of the prompt shows the active port name when connected, or <code>disconnected</code> in red. The prompt itself stays open between commands — type the next command and press Enter.</p>
+<p><strong>Tab-completion</strong> is available on all commands and register names.</p>
+<hr />
+<h2 id="command-reference">Command Reference</h2>
+<h3 id="connection">Connection</h3>
+<h4 id="connect-port-baud"><code>connect [&lt;port&gt;] [&lt;baud&gt;]</code></h4>
+<p>Opens a serial connection to the FPGA.</p>
+<pre><code>[FPGA] › connect /dev/ttyUSB0 115200
+[FPGA] › connect COM3
+[FPGA] › connect
+</code></pre>
+<p>If no port is specified the application selects the first available port automatically. If no baud rate is specified it defaults to <code>115200</code>.</p>
+<hr />
+<h4 id="disconnect"><code>disconnect</code></h4>
+<p>Closes the active serial connection.</p>
+<pre><code>[FPGA] › disconnect
+</code></pre>
+<hr />
+<h4 id="ports"><code>ports</code></h4>
+<p>Lists all detected serial ports with device name, description, USB VID, and PID.</p>
+<pre><code>[FPGA] › ports
+</code></pre>
+<p>Useful for identifying the correct port before connecting.</p>
+<hr />
+<h3 id="register-programming">Register Programming</h3>
+<p>Registers are set locally first, then pushed to the FPGA explicitly. This two-step model lets you stage a full configuration before sending anything over the wire.</p>
+<h4 id="set-register-value"><code>set &lt;register&gt; &lt;value&gt;</code></h4>
+<p>Updates a register's local value. Does <strong>not</strong> transmit anything. Values can be decimal or <code>0x</code>-prefixed hex.</p>
+<pre><code>[FPGA] › set prbs_cross 0xA5
+[FPGA] › set prbs_enable A5
+[FPGA] › set watchdog 16
+[FPGA] › set duration 100
+[FPGA] › set toggle 50
+</code></pre>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Register</th>
+<th>FPGA Address</th>
+<th>Description</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prbs_cross</code></td>
+<td><code>0x02</code></td>
+<td>PRBS cross LFSR seed</td>
+<td><code>0x00</code>–<code>0xFF</code></td>
+</tr>
+<tr>
+<td><code>prbs_enable</code></td>
+<td><code>0x03</code></td>
+<td>PRBS enable LFSR seed</td>
+<td><code>0x00</code>–<code>0xFF</code></td>
+</tr>
+<tr>
+<td><code>watchdog</code></td>
+<td><code>0x04</code></td>
+<td>Watchdog PGA maximum count</td>
+<td><code>0</code>–<code>255</code></td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td><code>0x05</code></td>
+<td>Experiment duration (µs)</td>
+<td><code>0</code>–<code>255</code></td>
+</tr>
+<tr>
+<td><code>toggle</code></td>
+<td><code>0x06</code></td>
+<td>RX/TX toggle period (µs)</td>
+<td><code>0</code>–<code>255</code></td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>PRBS seed warning:</strong> Avoid setting <code>prbs_cross</code> or <code>prbs_enable</code> to <code>0x00</code>. The all-zero state has no feedback path and the LFSR will lock up permanently.</p>
+</blockquote>
+<hr />
+<h4 id="program-register"><code>program [&lt;register&gt;]</code></h4>
+<p>Transmits the current register value(s) to the FPGA over UART.</p>
+<pre><code class="language-bash"># Push all registers at once
+[FPGA] › program
+
+# Push a single register
+[FPGA] › program prbs_cross
+[FPGA] › program duration
+</code></pre>
+<p>Each <code>program</code> call sends a two-byte packet <code>[addr, data]</code> per register. The FPGA processes them in sequence. A connection must be open before calling <code>program</code>.</p>
+<hr />
+<h3 id="experiment-control">Experiment Control</h3>
+<h4 id="run"><code>run</code></h4>
+<p>Starts the experiment. Sends <code>[0x01, 0x00]</code> to the FPGA.</p>
+<pre><code>[FPGA] › run
+</code></pre>
+<p>The FPGA deasserts <code>experiment_enb</code>, releasing all submodules (PRBS generators, watchdog, RX/TX controller).</p>
+<hr />
+<h4 id="stop"><code>stop</code></h4>
+<p>Stops the experiment. Sends <code>[0x01, 0xFF]</code> to the FPGA.</p>
+<pre><code>[FPGA] › stop
+</code></pre>
+<hr />
+<h3 id="diagnostics">Diagnostics</h3>
+<h4 id="status"><code>status</code></h4>
+<p>Displays a panel showing the current connection state and all staged register values.</p>
+<pre><code>[FPGA] › status
+</code></pre>
+<p>Output example:</p>
+<pre><code>╭─────────────── ◈  FPGA STATUS ────────────────╮
+│  CONNECTED  /dev/ttyUSB0  @  115200 baud       │
+│                                                │
+│  Register                  Value    Addr       │
+│  PRBS Cross Seed           0xA5     0x02       │
+│  PRBS Enable Seed          0x3C     0x03       │
+│  Watchdog Max              16       0x04       │
+│  Experiment Duration (µs)  100      0x05       │
+│  Toggle Period (µs)        50       0x06       │
+╰────────────────────────────────────────────────╯
+</code></pre>
+<hr />
+<h4 id="log"><code>log</code></h4>
+<p>Prints a table of all UART packets transmitted in the current session, with sequence number, timestamp, address, register label, and data byte.</p>
+<pre><code>[FPGA] › log
+</code></pre>
+<h4 id="log-clear"><code>log clear</code></h4>
+<p>Clears the TX packet log.</p>
+<pre><code>[FPGA] › log clear
+</code></pre>
+<hr />
+<h4 id="help"><code>help</code></h4>
+<p>Prints the full command reference inside the terminal.</p>
+<pre><code>[FPGA] › help
+</code></pre>
+<hr />
+<h4 id="exit-quit"><code>exit</code> / <code>quit</code></h4>
+<p>Closes the serial connection and exits the application. <code>Ctrl+C</code> and <code>Ctrl+D</code> are also handled gracefully.</p>
+<pre><code>[FPGA] › exit
+</code></pre>
+<hr />
+<h2 id="typical-session">Typical Session</h2>
+<pre><code class="language-bash"># 1. Launch and connect
+python cli.py --port /dev/ttyUSB0
+
+# 2. Stage register values
+[FPGA] › set prbs_cross 0xA5
+[FPGA] › set prbs_enable 0x3C
+[FPGA] › set duration 100
+[FPGA] › set toggle 50
+[FPGA] › set watchdog 16
+
+# 3. Push all registers to FPGA
+[FPGA] › program
+
+# 4. Verify staged values
+[FPGA] › status
+
+# 5. Start experiment
+[FPGA] › run
+
+# 6. Check what was sent
+[FPGA] › log
+
+# 7. Stop when done
+[FPGA] › stop
+</code></pre>
+<hr />
+<h2 id="value-format-reference">Value Format Reference</h2>
+<p>All numeric arguments accept either decimal or <code>0x</code>-prefixed hex. The bare hex form (without <code>0x</code>) is also accepted.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Interpreted as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>100</code></td>
+<td>decimal 100</td>
+</tr>
+<tr>
+<td><code>0x64</code></td>
+<td>hex → decimal 100</td>
+</tr>
+<tr>
+<td><code>64</code></td>
+<td>hex → decimal 100 (<code>int(..., 0)</code> base inference)</td>
+</tr>
+<tr>
+<td><code>0xFF</code></td>
+<td>255</td>
+</tr>
+</tbody>
+</table></div>
+<p>All values must be in the range <code>0</code>–<code>255</code> (8-bit). The CLI will reject out-of-range values before transmitting.</p>
+<hr />
+<h2 id="error-handling">Error Handling</h2>
+<p>The CLI distinguishes three output levels:</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Colour</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>✔</code></td>
+<td>Green</td>
+<td>Operation succeeded</td>
+</tr>
+<tr>
+<td><code>✘</code></td>
+<td>Red</td>
+<td>Operation failed — message gives the reason</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>Amber</td>
+<td>Warning — action may need attention</td>
+</tr>
+<tr>
+<td><code>→</code></td>
+<td>Amber</td>
+<td>Informational — no action required</td>
+</tr>
+</tbody>
+</table></div>
+<p>If a <code>program</code> or <code>run</code>/<code>stop</code> call fails, the error reported by the backend (<code>backend.state.error</code>) is printed inline. The connection remains open — retry after resolving the issue.</p>
+  </div>
+  
+  <script>
+    document.querySelectorAll('article h2, article h3').forEach((header) => {
+      toc.observer.observe(header);
+    });
+  </script>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 shadow-none"
+        href="None">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-left ">
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
+        </svg>
+        <span class="max-[500px]:hidden">Controller Interface</span>
+    </a>
+    
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 ml-auto shadow-none"
+        href="None">
+        <span class="max-[500px]:hidden">Contributing</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-right ">
+            <path d="M5 12l14 0"></path>
+            <path d="M13 18l6 -6"></path>
+            <path d="M13 6l6 6"></path>
+        </svg>
+    </a>
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="..">
+                        
+                        FIALNA Tapeout Docs
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../interface/">
+                        
+                        Controller Interface
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="./">
+                        
+                        Command Line Interface
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="../contributing/">
+                        
+                        Contributing
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div id="toc" view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#installation"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#installation');">
+            Installation
+        </a>
+        
+        
+        <a href="#dependencies"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#dependencies');">
+            Dependencies
+        </a>
+        
+        
+
+        
+        <a href="#launching"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#launching');">
+            Launching
+        </a>
+        
+        
+        <a href="#options"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#options');">
+            Options
+        </a>
+        
+        <a href="#examples"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#examples');">
+            Examples
+        </a>
+        
+        
+
+        
+        <a href="#interface"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#interface');">
+            Interface
+        </a>
+        
+
+        
+        <a href="#command-reference"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#command-reference');">
+            Command Reference
+        </a>
+        
+        
+        <a href="#connection"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#connection');">
+            Connection
+        </a>
+        
+        <a href="#register-programming"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#register-programming');">
+            Register Programming
+        </a>
+        
+        <a href="#experiment-control"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#experiment-control');">
+            Experiment Control
+        </a>
+        
+        <a href="#diagnostics"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3" onClick="deferSetActiveTocLink('#diagnostics');">
+            Diagnostics
+        </a>
+        
+        
+
+        
+        <a href="#typical-session"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#typical-session');">
+            Typical Session
+        </a>
+        
+
+        
+        <a href="#value-format-reference"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#value-format-reference');">
+            Value Format Reference
+        </a>
+        
+
+        
+        <a href="#error-handling"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2" onClick="deferSetActiveTocLink('#error-handling');">
+            Error Handling
+        </a>
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="../js/mathjax.js"></script>
+
+     
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+     
+
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+     
+
+<script src="../search/main.js"></script>
+
+
+    
+
+    <script src="../js/copy-button.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/slider.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"]
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>
