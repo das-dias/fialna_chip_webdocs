@@ -1,15 +1,15 @@
 site_name: FIALNA-Tapeout Docs
 theme:
   name: shadcn
-  show_title: true # show the title in the top bar
-  show_stargazers: true # show the stargazers in the top bar
-  pygments_style: # default styles 
+  show_title: true # show the title in the top bar
+  show_stargazers: true # show the stargazers in the top bar
+  pygments_style: # default styles 
         light: shadcn-light
         dark: github-dark
   icon: heroicons:rocket-launch # use the shadcn svg if not defined
   topbar_sections: false 
-  katex_options: # optional
-    macros: # example of macros
+  katex_options: # optional
+    macros: # example of macros
       "\\RR": "\\mathbb{R}" 
       "\\dx": "\\mathrm{d}x"
   show_datetime: false 
