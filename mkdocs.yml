@@ -1,4 +1,5 @@
 site_name: FIALNA-Tapeout Docs
+site_url: https://das-dias.github.io/fialna_chip_webdocs/ # Critical for deployment
 theme:
   name: shadcn
   show_title: true # show the title in the top bar
@@ -6,8 +7,8 @@ theme:
   pygments_style: # default styles 
         light: shadcn-light
         dark: github-dark
-  icon: heroicons:rocket-launch # use the shadcn svg if not defined
-  topbar_sections: false 
+  icon: heroicons:cpu-chip # use the shadcn svg if not defined
+  topbar_sections: true
   katex_options: # optional
     macros: # example of macros
       "\\RR": "\\mathbb{R}" 
