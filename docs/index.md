@@ -18,11 +18,11 @@ The architectural overview of the chip can be observed in the following view:
 
 ---
 
-# ASIC Pinout
+## ASIC Pinout
 
 ---
 
-## Analog Pins
+### Analog Pins
 
 | Pin | Direction | Voltage | Description |
 |---|---|---|---|
@@ -45,7 +45,7 @@ The architectural overview of the chip can be observed in the following view:
 
 ---
 
-## Digital Control Pins
+### Digital Control Pins
 
 | Pin | Direction | Active | Voltage | FPGA Signal | Description |
 |---|---|---|---|---|---|
@@ -66,7 +66,7 @@ The architectural overview of the chip can be observed in the following view:
 
 ---
 
-## Power and Ground Pins
+### Power and Ground Pins
 
 | Pin | Type | Voltage | Description |
 |---|---|---|---|
@@ -81,7 +81,7 @@ The architectural overview of the chip can be observed in the following view:
 
 ---
 
-## Internal Block Notes
+### Internal Block Notes
 
 | # | Note |
 |---|---|
